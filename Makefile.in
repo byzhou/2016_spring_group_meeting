@@ -6,7 +6,7 @@
 # Each one of these needs a set of explicit build rules below. I can't
 # use pattern rules because GNU Make doesn't allow for PHONY pattern
 # rules. More detail below.
-SOURCES_TEX = PAPER.tex PRESENTATION.tex
+SOURCES_TEX = PAPER.tex PRESENTATION.tex POSTER.tex
 
 #--------------------------------------- Configuration that _should_ be static
 DIR_BUILD   = build
@@ -54,7 +54,7 @@ vpath %.tex src
 # Default target. This should either be set to build all targets with
 # LaTeX formatting cleanup (format-build) OR to just build without
 # cleanup (noformat-build)
-all: format-build
+all: noformat-build
 
 # Top-level build target that runs format (cleanup all source files
 # into a "nice" format good for version control) before building
@@ -117,6 +117,14 @@ $(DIR_BUILD)/PRESENTATION.pdf:PRESENTATION.tex $(SUPPORT_TEX) Makefile
 $(DIR_BUILD)/PRESENTATION.ps:PRESENTATION.tex $(SUPPORT_TEX) Makefile
 	$(ENV) $(LATEXMK_PS) $<
 $(DIR_BUILD)/PRESENTATION-opt.pdf:$(DIR_BUILD)/PRESENTATION.pdf
+	$(GS_OPT) -sOutputFile=$@ $<
+
+# Poster build rules
+$(DIR_BUILD)/POSTER.pdf:POSTER.tex $(SUPPORT_TEX) Makefile
+	$(ENV) $(LATEXMK_PDF) $<
+$(DIR_BUILD)/POSTER.ps:POSTER.tex $(SUPPORT_TEX) Makefile
+	$(ENV) $(LATEXMK_PS) $<
+$(DIR_BUILD)/POSTER-opt.pdf:$(DIR_BUILD)/POSTER.pdf
 	$(GS_OPT) -sOutputFile=$@ $<
 
 # Untested target that embeds fonts. To check for embedded fonts, I

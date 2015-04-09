@@ -14,3 +14,5 @@
 define(PAPER, latex-base)
 # The name of the top-level LaTeX presentation file
 define(PRESENTATION, latex-base-presentation)
+# The name of the top-level LaTeX poster file
+define(POSTER, latex-base-poster)
