@@ -1,27 +1,53 @@
 \documentclass{beamer}
 
-
+%colorthemes
 \usecolortheme{whale}
 \usecolortheme{orchid}
 
-\usepackage{tcolorbox}
+%posterbox def
+\newcommand{\titlebox}{
+    \begin{center}
+        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=3mm,width=0.5\textwidth,colframe=purple!60!black,colback=yellow!10]
+            \begin{center}
+}
+
+\newcommand{\titleboxend}{
+            \end{center}
+        \end{tcolorbox}
+    \end{center}
+}
+
+\newcommand{\posterbox}[1]{
+    \begin{tcolorbox}[width=\textwidth,colback=blue!10,colframe=blue!60!black,title=#1]
+}
+
+\newcommand{\posterboxend}{
+    \end{tcolorbox}
+}
 
 \input{header-poster}
 \begin{document}
+    {\color{white}empty empty}\\
+    \titlebox
+    \huge{Detecting Hardware Trojans Using Backside Optical Imaging of
+    Embedded Watermarks}\\
+    \large{Boyou Zhou, Ronen Adato, Mahmoud Zangeneh, Tianyu Yang, Aydan
+    Uyar, \\Bennett Goldberg, Selim Unlu, Ajay Joshi\\}
+    \titleboxend
 
-    \begin{tcolorbox}[colback=blue!5,colframe=blue!75!black,title=My title]
-        My cool formalization
-        \tcblower
-            $\displaystyle\sum\limits_{i=1}^n i = \frac{n(n+1)}{2}$
-    \end{tcolorbox}
-
-    \begin{exampleblock}[colframe=blue!75!black]
-        dfdf
-    \end{exampleblock}
+    \posterbox{Introduction}
+        test
+    \posterboxend
+       
+        
     \begin{columns}
         \column{0.5\textwidth}
-        dfdf
+            \posterbox{related work}
+                test
+            \posterboxend
         \column{0.5\textwidth}
-        dfdf
+            \posterbox{related work}
+                dfdfdfdfdfdf
+            \posterboxend
     \end{columns}
 \end{document}
