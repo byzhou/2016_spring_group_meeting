@@ -7,7 +7,7 @@
 %posterbox def
 \newcommand{\titlebox}{
     \begin{center}
-        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=3mm,width=0.5\textwidth,colframe=purple!60!black,colback=yellow!10]
+        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=5mm,width=\textwidth,colframe=red!70!black,colback=yellow!10]
             \begin{center}
 }
 
@@ -18,7 +18,7 @@
 }
 
 \newcommand{\posterbox}[1]{
-    \begin{tcolorbox}[width=\textwidth,colback=blue!10,colframe=blue!60!black,title=#1]
+    \begin{tcolorbox}[width=\textwidth,colback=yellow!10,colframe=red!70!black,title=#1,fonttitle=\LARGE]
 }
 
 \newcommand{\posterboxend}{
@@ -27,27 +27,232 @@
 
 \input{header-poster}
 \begin{document}
-    {\color{white}empty empty}\\
-    \titlebox
-    \huge{Detecting Hardware Trojans Using Backside Optical Imaging of
-    Embedded Watermarks}\\
-    \large{Boyou Zhou, Ronen Adato, Mahmoud Zangeneh, Tianyu Yang, Aydan
-    Uyar, \\Bennett Goldberg, Selim Unlu, Ajay Joshi\\}
-    \titleboxend
 
-    \posterbox{Introduction}
-        test
-    \posterboxend
-       
-        
+    {\color{white}empty empty}\\
+    
+    \begin{columns}
+        \column{0.2\textwidth}
+            \begin{figure}
+                \includegraphics[width=3in]{img/Boston_University_seal.eps}
+            \end{figure}
+        \column{0.6\textwidth}
+            \titlebox
+            \Huge{Detecting Hardware Trojans Using Backside Optical Imaging of
+            Embedded Watermarks}\\
+            \large{Boyou Zhou, Ronen Adato, Mahmoud Zangeneh, Tianyu Yang, Aydan
+            Uyar, \\Bennett Goldberg, Selim Unlu, Ajay Joshi\\}
+            \titleboxend
+        \column{0.2\textwidth}
+            \begin{figure}
+                \includegraphics[width=5in]{img/Boston_University_Wordmark.eps}
+            \end{figure}
+    \end{columns}
+
+    {\color{white}empty empty}\\
+
     \begin{columns}
         \column{0.5\textwidth}
-            \posterbox{related work}
-                test
+            \posterbox{Introduction}
+            \posterboxend
+            \posterbox{Related work}
+            \posterboxend
+            \posterbox{Optical Watermarks: Design and Measurement}
+                \begin{figure}
+                    \centering
+                    \hspace{-5mm}
+                    \includegraphics[width=0.9\textwidth]{img/uni_response.pdf}
+                    \vspace{-3mm}
+                    \caption{{\color{black} The reflectance spectrum of functional gates and
+                    fill cells, computed via FDTD simulations. The response is computed for both
+                    X and Y polarizations of the illuminating field (solid and dashed lines,
+                    respectively). For X polarization, the incident electric field is polarized
+                    along the VDD and VSS rails. For Y polarization, the polarization is
+                    perpendicular.}}
+                    \vspace{-0.25in}
+                    \label{fig:single_cell_response}
+                \end{figure}
             \posterboxend
         \column{0.5\textwidth}
-            \posterbox{related work}
-                dfdfdfdfdfdf
+            \posterbox{Detection Process}
+
+%                \begin{figure}[t]
+%                    \centering
+%                %    \hspace{-10mm}
+%                    \subfigure[]{
+%                        \includegraphics[trim=0mm 0mm 0mm0mm,clip,width=1.3in]{img/layout.png}
+%                        \label{layout}
+%                    }
+%                    \subfigure[]{
+%                        \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=1.8in]{img/mod/Free.pdf}
+%                        \label{multiple_gates_without_Trojans}
+%                    }
+%                    \vspace{-0.2in}
+%                    \caption{
+%                        (a) Physical layout of a $10\mu m \times 10\mu m$ region of the AEST100
+%                        hardware block. (b) Backside image (reflectance value) of the $10\mu m
+%                        \times 10\mu m$ region. The fill cells have the highest reflectance. 
+%                    }
+%                    \label{fig:backside-img1}
+%                    \vspace{-0.2in}
+%                \end{figure}
+%
+%                \begin{figure*}[t]
+%                    \centering
+%                    \subfigure[]{
+%                        \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=2.0in]{img/mod/In.pdf}
+%                        \label{multiple_gates_with_changes_to_filler_cells}
+%                    }
+%                    \hspace{0.13in}
+%                    \subfigure[]{
+%                        \includegraphics[trim=2mm 2mm 2mm 2mm,clip,width=2.0in]{img/shi/In.pdf}
+%                        \label{multiple_gates_with_shifts_to_filler_cells}
+%                    }
+%                    \hspace{0.13in}
+%                    \subfigure[]{
+%                        \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=2.0in]{img/rep/In.pdf}
+%                        \label{multiple_gates_with_changes_to_none_filler_cells}
+%                    }
+%                    \vspace{-0.2in}
+%                    \caption{
+%                        (a) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
+%                        region when the fill cells are replaced with functional gates that
+%                        constitute the Hardware Trojans. 
+%                        (b) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
+%                        region when the bottom 3 rows are shifted by 5 $\mu$m to the left make room for
+%                        cells that constitute the HT. 
+%                        (c) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
+%                        region when the functional cells are replaced by a different set of
+%                        cells that constitute the HT.}
+%                    \label{fig:backside-img2}
+%                    \vspace{-0.2in}
+%                \end{figure*} 
+%                \begin{figure}[h]
+%                     \centering
+%                     \subfigure[]{
+%                         \includegraphics[width=1.5in]{img/real/Free.png}
+%                         %\includegraphics[width=\columnwidth]{real/Free.pdf}
+%                         \label{50by50_without_trojans}
+%                     }
+%                     \subfigure[]{
+%                         \includegraphics[width=1.5in]{img/real/In.png}
+%                         \label{50by50_with_trojans}
+%                     }
+%                    \vspace{-0.2in}
+%                     \caption{
+%                         (a) Backside image (reflectance values) of a Trojan-free $50\mu m \times 50\mu
+%                         m$ region of the AEST100 hardware block.
+%                         (b) Backside image (reflectance values) of the same $50\mu m \times 50\mu
+%                         m$ region of the AEST100 hardware block with {\color{black}CDMA private
+%                         key disclosure} type of HT inserted in it.}
+%                     \label{imaging_result}
+%                     \vspace{-0.1in}
+%                 \end{figure}
+
+                \begin{figure}[h]
+                    \centering
+                    \includegraphics[width=1.0\columnwidth]{img/thresholdDecision.pdf}
+                        \vspace{-0.3in}
+                    \label{fig:threshold}
+                    \caption{Detection Error rate vs Detection Threshold. \ignore{\color{red}After a Monte-Carlo simulation of detection error rate against
+                    detection threshold, we decide the optimized detection threshold should be
+                    $0.65$ for a fixed SNR of 10.}}
+                        \vspace{-0.25in}
+                \end{figure}
+
+                \begin{figure}[ht]
+                    \begin{center}
+                        \includegraphics[width=0.45\textwidth]{img/fillercells1.pdf}~
+                        \includegraphics[width=0.45\textwidth]{img/fillercells2.pdf}\par
+                        \includegraphics[width=0.45\textwidth]{img/fillercells3.pdf}~
+                        \includegraphics[width=0.45\textwidth]{img/fillercells4.pdf}
+                        \vspace{-0.1in}
+                        \caption{Impact of process variations on the reflectance signal for two
+                        different types of fill cells for various wavelengths. Black lines correspond to the nominal value, Red lines correspond to +10\% variation and Blue lines correspond to -10\% variation. X and Y correspond to X polarization and Y polarization, respectively.}
+                        \label{fig:PV}
+                        \vspace{-0.3in}
+                    \end{center}
+                \end{figure}
+
+                \begin{figure}[ht]
+                    \centering
+                    \includegraphics[width=0.95\textwidth]{img/snr.pdf}
+                    \vspace{-0.25in}
+                    \label{fig:snr}
+                    \caption{
+                        {\color{black}Testbench AES and PIC Trojan Detection Rate under different
+                    Signal-to-Noise Ratio
+                    (a) is AES100
+                    (b) is AES200
+                    (c) is AES1000
+                    (d) is PIC100
+                    (e) is PIC200
+                    (f) is PIC300}
+                    }
+                    \vspace{-0.15in}
+                \end{figure}
+
+                \begin{table}[!t]
+                    %\vspace{-3in}
+                    %\resizebox{\textwidth}{!}{%
+                    \begin{center}
+                    \begin{tabular*}{\columnwidth}{c c c}
+                        Testbench & Trojan Leakage        & Trojan Total Power  \\
+                                  & Percentage (\% of     & Percentage (\% of \\
+                                  & Total leakage)        & Total power) \\
+                    \hline
+                        AES100    & 1.64           & 1.05 \\
+                        AES200    & 0.8            & 1.0 \\
+                        AES1000   & 1.64           & 1.05 \\
+                        PIC100    &1.0             & 29 \\
+                        PIC200    & 1.21           & 34\\
+                        PIC300    &16              & 60 \\
+                    \end{tabular*}
+                    \vspace{-0.1in}%
+                    \caption{Trojan power overhead in various hardware blocks. The
+                    baseline designs of AES100, AES200 and AES1000 are the same, the inserted HTs
+                    are different. Similarly, the baseline design of PIC100, PIC200 and PIC300
+                    are the same but the inserted HTs are different. {\color{black}The power calculation was done using \textit{Nangate45nm} high performance library.}}
+                    \vspace{-0.35in}
+                    \label{tab:power}
+                    %}
+                    \end{center}
+                \end{table}
+
+                \begin{table}[h]
+                    %\vspace{-3in}
+                    %\resizebox{\textwidth}{!}{%
+                    \begin{center}
+                    \begin{tabular}{c c c c}
+                        Testbench & Area without & Trojan     & Trojan Area      \\
+                                  & Trojans      & Area       & Percentage (\%)  \\
+                    \hline
+                        AES100    & 274177.6     & 253.2      & 0.0923 \\
+                        AES200    & 274177.6     & 169.5      & 0.0618 \\
+                        AES1000   & 274177.6     & 251.1      & 0.0915 \\
+                        PIC100 	  & 4215.0 & 351 & 8.33 \\
+                        PIC200    & 4215.0 & 89.6 & 2.13 \\
+                        PIC300    & 4215.0 & 253.2 & 6.01 \\
+                    \end{tabular}
+                    \vspace{-3mm}
+                    \caption{Area (in $\mu m^2$) occupied by various hardware blocks.}
+                    \vspace{-9mm}
+                    \label{tab:area}
+                    %}
+                    \end{center}
+                \end{table}
+
+
+
+
+
+
+
+
+
+            \posterboxend
+            \posterbox{Evaluation}
+            \posterboxend
+            \posterbox{Conclusion}
             \posterboxend
     \end{columns}
 \end{document}
