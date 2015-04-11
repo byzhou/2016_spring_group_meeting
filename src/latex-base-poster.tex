@@ -18,7 +18,7 @@
 }
 
 \newcommand{\posterbox}[1]{
-    \begin{tcolorbox}[width=\textwidth,colback=yellow!10,colframe=red!70!black,title=#1,fonttitle=\LARGE]
+    \begin{tcolorbox}[width=\textwidth,colback=yellow!10,colframe=red!70!black,title=#1,fonttitle=\LARGE,fontupper=\large]
 }
 
 \newcommand{\posterboxend}{
@@ -49,13 +49,37 @@
     \end{columns}
 
     {\color{white}empty empty}\\
-
     \begin{columns}
-        \column{0.5\textwidth}
+        \column{0.33\textwidth}
             \posterbox{Introduction}
+                \begin{itemize}
+                    \item [*] CMOS integrated circuits (ICs) become
+                    critical in both defense and municipal support systems.
+                    \item [*] The IC industry has a trend towards international
+                    coorpation and away from vertical integration,
+                    which requires the security of ICs.
+                    \item [*] During the various phases of the IC integration,
+                    the ICs face threats from Hardware Trojans (HTs), IP privacy
+                    and IC counterfeiting. 
+                    \item [*] Among all these threats, HTs are one
+                    of the most significant problems. Since HTs can modify the
+                    functionality of ICs, leak secret information, disable the 
+                    entire chip, HTs are the security breaching point of
+                    hardware security.
+                    \item [*] There are three kinds of HT insertions, malicious
+                    IP core insertion, design modification and layout
+                    modification. The first two can be detected during the
+                    functional testing phase of IC production.
+                    \item [*] The layout insertion, however, can be extremely
+                    small in terms of area and power consumption, which is very
+                    hard to be detected during the post-silicon verification.
+                    \item [*] Thus, there is a pressing need for rapid, accurate
+                    and robust detection for this kind of HT insertion.
+                \end{itemize}
             \posterboxend
             \posterbox{Related work}
             \posterboxend
+        \column{0.33\textwidth}
             \posterbox{Optical Watermarks: Design and Measurement}
                 \begin{figure}
                     \centering
@@ -72,81 +96,55 @@
                     \label{fig:single_cell_response}
                 \end{figure}
             \posterboxend
-        \column{0.5\textwidth}
             \posterbox{Detection Process}
+                \begin{figure}
+                    \centering
+                %    \hspace{-10mm}
+                        \includegraphics[clip,width=0.365\textwidth]{img/layout.png}~
+                        \includegraphics[clip,width=0.5\textwidth]{img/mod/Free.pdf}
+                    %\vspace{-0.2in}
+                    \caption{
+                        (a) Physical layout of a $10\mu m \times 10\mu m$ region of the AEST100
+                        hardware block. (b) Backside image (reflectance value) of the $10\mu m
+                        \times 10\mu m$ region. The fill cells have the highest reflectance. 
+                    }
+                    \label{fig:backside-img1}
+                    \vspace{-0.2in}
+                \end{figure}
 
-%                \begin{figure}[t]
-%                    \centering
-%                %    \hspace{-10mm}
-%                    \subfigure[]{
-%                        \includegraphics[trim=0mm 0mm 0mm0mm,clip,width=1.3in]{img/layout.png}
-%                        \label{layout}
-%                    }
-%                    \subfigure[]{
-%                        \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=1.8in]{img/mod/Free.pdf}
-%                        \label{multiple_gates_without_Trojans}
-%                    }
-%                    \vspace{-0.2in}
-%                    \caption{
-%                        (a) Physical layout of a $10\mu m \times 10\mu m$ region of the AEST100
-%                        hardware block. (b) Backside image (reflectance value) of the $10\mu m
-%                        \times 10\mu m$ region. The fill cells have the highest reflectance. 
-%                    }
-%                    \label{fig:backside-img1}
-%                    \vspace{-0.2in}
-%                \end{figure}
-%
-%                \begin{figure*}[t]
-%                    \centering
-%                    \subfigure[]{
-%                        \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=2.0in]{img/mod/In.pdf}
-%                        \label{multiple_gates_with_changes_to_filler_cells}
-%                    }
-%                    \hspace{0.13in}
-%                    \subfigure[]{
-%                        \includegraphics[trim=2mm 2mm 2mm 2mm,clip,width=2.0in]{img/shi/In.pdf}
-%                        \label{multiple_gates_with_shifts_to_filler_cells}
-%                    }
-%                    \hspace{0.13in}
-%                    \subfigure[]{
-%                        \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=2.0in]{img/rep/In.pdf}
-%                        \label{multiple_gates_with_changes_to_none_filler_cells}
-%                    }
-%                    \vspace{-0.2in}
-%                    \caption{
-%                        (a) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
-%                        region when the fill cells are replaced with functional gates that
-%                        constitute the Hardware Trojans. 
-%                        (b) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
-%                        region when the bottom 3 rows are shifted by 5 $\mu$m to the left make room for
-%                        cells that constitute the HT. 
-%                        (c) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
-%                        region when the functional cells are replaced by a different set of
-%                        cells that constitute the HT.}
-%                    \label{fig:backside-img2}
-%                    \vspace{-0.2in}
-%                \end{figure*} 
-%                \begin{figure}[h]
-%                     \centering
-%                     \subfigure[]{
-%                         \includegraphics[width=1.5in]{img/real/Free.png}
-%                         %\includegraphics[width=\columnwidth]{real/Free.pdf}
-%                         \label{50by50_without_trojans}
-%                     }
-%                     \subfigure[]{
-%                         \includegraphics[width=1.5in]{img/real/In.png}
-%                         \label{50by50_with_trojans}
-%                     }
-%                    \vspace{-0.2in}
-%                     \caption{
-%                         (a) Backside image (reflectance values) of a Trojan-free $50\mu m \times 50\mu
-%                         m$ region of the AEST100 hardware block.
-%                         (b) Backside image (reflectance values) of the same $50\mu m \times 50\mu
-%                         m$ region of the AEST100 hardware block with {\color{black}CDMA private
-%                         key disclosure} type of HT inserted in it.}
-%                     \label{imaging_result}
-%                     \vspace{-0.1in}
-%                 \end{figure}
+                \begin{figure}[t]
+                    \centering
+                        \includegraphics[clip,width=0.33\textwidth]{img/mod/In.pdf}~
+                        \includegraphics[clip,width=0.33\textwidth]{img/shi/In.pdf}~
+                        \includegraphics[clip,width=0.33\textwidth]{img/rep/In.pdf}
+                    \caption{
+                        (a) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
+                        region when the fill cells are replaced with functional gates that
+                        constitute the Hardware Trojans. 
+                        (b) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
+                        region when the bottom 3 rows are shifted by 5 $\mu$m to the left make room for
+                        cells that constitute the HT. 
+                        (c) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
+                        region when the functional cells are replaced by a different set of
+                        cells that constitute the HT.}
+                    \label{fig:backside-img2}
+                    \vspace{-0.2in}
+                \end{figure} 
+                \posterboxend
+                \posterbox{Detection Process}
+
+                \begin{figure}[h]
+                     \centering
+                         \includegraphics[width=0.5\textwidth]{img/real/Free.png}~
+                         \includegraphics[width=0.5\textwidth]{img/real/In.png}
+                     \caption{
+                         (a) Backside image (reflectance values) of a Trojan-free $50\mu m \times 50\mu
+                         m$ region of the AEST100 hardware block.
+                         (b) Backside image (reflectance values) of the same $50\mu m \times 50\mu
+                         m$ region of the AEST100 hardware block with {\color{black}CDMA private
+                         key disclosure} type of HT inserted in it.}
+                     \label{imaging_result}
+                 \end{figure}
 
                 \begin{figure}[h]
                     \centering
@@ -158,6 +156,10 @@
                     $0.65$ for a fixed SNR of 10.}}
                         \vspace{-0.25in}
                 \end{figure}
+
+            \posterboxend
+        \column{0.33\textwidth}
+            \posterbox{Evaluation}
 
                 \begin{figure}[ht]
                     \begin{center}
@@ -240,17 +242,6 @@
                     %}
                     \end{center}
                 \end{table}
-
-
-
-
-
-
-
-
-
-            \posterboxend
-            \posterbox{Evaluation}
             \posterboxend
             \posterbox{Conclusion}
             \posterboxend
