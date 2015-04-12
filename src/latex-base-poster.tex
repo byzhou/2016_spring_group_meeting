@@ -7,7 +7,7 @@
 %posterbox def
 \newcommand{\titlebox}{
     \begin{center}
-        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=5mm,width=\textwidth,colframe=blue!70!black,colback=yellow!10]
+        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=5mm,width=\textwidth,colframe=blue!70!black,colback=yellow!20]
             \begin{center}
 }
 
@@ -18,7 +18,7 @@
 }
 
 \newcommand{\posterbox}[1]{
-    \begin{tcolorbox}[arc=5mm,width=\textwidth,colback=yellow!10,colframe=blue!70!black,adjusted
+    \begin{tcolorbox}[arc=5mm,width=\textwidth,colback=yellow!20,colframe=blue!70!black,adjusted
     title=#1,fonttitle=\LARGE,fontupper=\large,
     ]
     %graphical environment=tikzpicture,
@@ -79,7 +79,8 @@
                     functional testing phase of IC production.
                     \item [*] The layout insertion, however, can be extremely
                     small in terms of area and power consumption, which is very
-                    hard to be detected during the post-silicon verification.
+                    hard to be detected during the post-silicon
+                    verification.~\cite{rostami2014primer}
                     \item [*] Thus, there is a pressing need for rapid, accurate
                     and robust detection for this kind of HT insertion.
                     \item [*] This work is proposing an optical method that can
@@ -90,11 +91,13 @@
             \posterbox{Related work}
                 \begin{itemize}
                     \item [*] State-of-the-art techniques for detecting HTs
-                    include both destructive and non-destructive approaches.
+                    include both destructive and non-destructive
+                    approaches.~\cite{Tehranipoor2010,Karri2010}
                     \item [*] Destructive approaches requires high cost of
                     reverse engineering and precise measurements. 
                     \item [*] While the non-destructive approaches are taken the
-                    form of functional testing or side-channel analysis.
+                    form of functional testing or side-channel
+                    analysis.~\cite{Chakraborty2009}
                     \item [*] Functional testing consists of system inputs and
                     verification on the outputs. However, for some HTs,
                     triggering rate is extremely small. These test can be costly
@@ -102,11 +105,12 @@
                     \item [*] Side-channel analysis detect the HTs by analyzing
                     the physical characteristics of the chip. Such techniques
                     include power analysis, time-based analysis, emission
-                    analysis, and thermal analysis.
+                    analysis, and thermal analysis.~\cite{Rad2008Iccad,
+                    Alkabani2009Iccad,Potkonjak2009Dac, Sheng2012Tvlsi}
                     \item [*] One of the most popular techniques is PUF design.
                     With certain amount of challenge and response (CRP)  pairs
                     of the design, the PUF can be used as the signature of the
-                    chip.  
+                    chip.~\cite{wei2012hardware}  
                     \item [*] These designs can be easily implemented but
                     requries a large amount of CRPs to have a complete coverage
                     of the measurement space.
@@ -128,8 +132,6 @@
                     \label{fig:single_cell_response}
                 \end{figure}
             \posterboxend
-        \end{column}
-        \begin{column}[T]{0.33\textwidth}
             \posterbox{Detection Process}
                 \begin{figure}
                     \centering
@@ -145,18 +147,30 @@
                     \label{fig:backside-img1}
                     \vspace{-0.2in}
                 \end{figure}
-
+            \posterboxend
+        \end{column}
+        \begin{column}[T]{0.33\textwidth}
+            \posterbox{Detection Process}
                 \begin{figure}[t]
                     \begin{columns}
-                        \column{0.5\textwidth}
-                        \centering
+                    \column{0.5\textwidth}
+                    \begin{center}
                         \includegraphics[clip,width=\textwidth]{img/mod/In.pdf}\\
                         (a)\\
+                    \end{center}
+                    \column{0.5\textwidth}
+                    \begin{center}
                         \includegraphics[clip,width=\textwidth]{img/shi/In.pdf}\\
                         (b)\\
+                    \end{center}
+                    \end{columns}
+                    \begin{columns}
+                    \column{0.5\textwidth}
+                    \begin{center}
                         \includegraphics[clip,width=\textwidth]{img/rep/In.pdf}\\
                         (c)
-                        \column{0.5\textwidth}
+                    \end{center}
+                    \column{0.5\textwidth}
                         \caption{
                          (a) Backside image (reflectance value) of the $10\mu m
                         \times 10\mu m$ region when the fill cells are replaced
@@ -164,11 +178,13 @@
                         Trojans.  (b) Backside image (reflectance value) of the
                         $10\mu m \times 10\mu m$ region when the bottom 3 rows
                         are shifted by 5 $\mu$m to the left make room for cells
-                        that constitute the HT.  (c) Backside image (reflectance
+                        that constitute the HT.  }
+                    \end{columns}
+                        \justify
+                        (c) Backside image (reflectance
                         value) of the $10\mu m \times 10\mu m$ region when the
                         functional cells are replaced by a different set of
-                        cells that constitute the HT.}
-                    \end{columns}
+                        cells that constitute the HT.
                 \end{figure} 
 
                 \begin{figure}[h]
@@ -198,10 +214,7 @@
                 \end{figure}
 
             \posterboxend
-        \end{column}
-        \begin{column}[T]{0.33\textwidth}
-            \posterbox{Evaluation}
-
+            \posterbox{Detection Process}
                 \begin{figure}[ht]
                     \begin{center}
                         \includegraphics[width=\textwidth]{img/fillercells1.pdf}\\
@@ -218,6 +231,10 @@
                         \vspace{-0.3in}
                     \end{center}
                 \end{figure}
+            \posterboxend
+        \end{column}
+        \begin{column}[T]{0.33\textwidth}
+            \posterbox{Evaluation}
 
                 \begin{figure}[h]
                     \centering
@@ -245,11 +262,9 @@
                     \vspace{-0.15in}
                 \end{figure}
 
-                \begin{center}
-                    \begin{table}[h]
+                \begin{table}[h]
                         %\vspace{-3in}
                         %\resizebox{\textwidth}{!}{%
-                        \begin{center}
                             \begin{tabular}{c c c}
                                           & Trojan Leakage        & Trojan Total Power  \\
                                 Testbench & Percentage (\% of     & Percentage (\% of \\
@@ -271,9 +286,7 @@
                             \textit{Nangate45nm} high performance library.}}
                             \label{tab:power}
                             %}
-                        \end{center}
-                    \end{table}
-                \end{center}
+                \end{table}
 
                 \begin{table}[h]
                     %\vspace{-3in}
@@ -290,15 +303,29 @@
                             PIC200    & 4215.0 & 89.6 & 2.13 \\
                             PIC300    & 4215.0 & 253.2 & 6.01 \\
                         \end{tabular}
-                        \vspace{-3mm}
                         \caption{Area (in $\mu m^2$) occupied by various hardware blocks.}
-                        \vspace{-9mm}
                         \label{tab:area}
                         %}
                     \end{center}
                 \end{table}
             \posterboxend
             \posterbox{Conclusion}
+            \begin{itemize}
+            \item [*] We propose a new technique that uses backside imaging for
+            detecting HTs. 
+            \item [*] We evaluate our proposed approach using a variety of AES and
+            PIC blocks and show that we are able to detect extremely small HTs,
+            which have power consumption that is 12 less than 2\% of the total
+            chip and an area that is less than 0.1\% of the total area.
+            \item [*] We also prove that our approach is robust to measurement noise
+            and $\pm10\%$ process variations.
+            \end{itemize}
+            \posterboxend
+            \posterbox{Reference}
+                \bibliographystyle{nar}
+                %\begin{multicols}{2}
+                \bibliography{src/bib/hw-security-spectroscopy-dac2015}
+                %\end{multicols}
             \posterboxend
         \end{column}
     \end{columns}
