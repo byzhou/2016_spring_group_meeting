@@ -12,10 +12,10 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{external}
 \usetikzlibrary{external,pgfplots.groupplots}
-\tikzexternalize[prefix=./build]
+\tikzexternalize[prefix=./build/]
 \ifpdf
-\else
 \tikzset{external/system call={latex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode -jobname "\image" "\texsource" && dvips -o "\image".ps "\image".dvi}}
+\else
 \fi
 
 %% Colorbrewer

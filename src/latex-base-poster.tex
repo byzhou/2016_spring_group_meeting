@@ -1,13 +1,13 @@
 \documentclass{beamer}
-
 %colorthemes
 \usecolortheme{whale}
 \usecolortheme{orchid}
 
+\input{header-poster}
 %posterbox def
 \newcommand{\titlebox}{
     \begin{center}
-        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=5mm,width=\textwidth,colframe=red!70!black,colback=yellow!10]
+        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=5mm,width=\textwidth,colframe=blue!70!black,colback=yellow!10]
             \begin{center}
 }
 
@@ -18,16 +18,23 @@
 }
 
 \newcommand{\posterbox}[1]{
-    \begin{tcolorbox}[width=\textwidth,colback=yellow!10,colframe=red!70!black,title=#1,fonttitle=\LARGE,fontupper=\large]
-}
+    \begin{tcolorbox}[arc=5mm,width=\textwidth,colback=yellow!10,colframe=blue!70!black,adjusted
+    title=#1,fonttitle=\LARGE,fontupper=\large,
+    ]
+    %graphical environment=tikzpicture,
+    %frame engine=path,
+    %interior titled engine=special,
+    %interior engine=special,
+    %segmentation engine=special,
+    %title engine=path,
+    %skin=beamer
+}%
 
 \newcommand{\posterboxend}{
     \end{tcolorbox}
 }
 
-\input{header-poster}
 \begin{document}
-
     {\color{white}empty empty}\\
     
     \begin{columns}
@@ -50,7 +57,7 @@
 
     {\color{white}empty empty}\\
     \begin{columns}
-        \column{0.33\textwidth}
+        \begin{column}[T]{0.33\textwidth}
             \posterbox{Introduction}
                 \begin{itemize}
                     \item [*] CMOS integrated circuits (ICs) become
@@ -75,11 +82,36 @@
                     hard to be detected during the post-silicon verification.
                     \item [*] Thus, there is a pressing need for rapid, accurate
                     and robust detection for this kind of HT insertion.
+                    \item [*] This work is proposing an optical method that can
+                    detect malicious tampering and insertion of HTs at the
+                    fabrication stage.
                 \end{itemize}
             \posterboxend
             \posterbox{Related work}
+                \begin{itemize}
+                    \item [*] State-of-the-art techniques for detecting HTs
+                    include both destructive and non-destructive approaches.
+                    \item [*] Destructive approaches requires high cost of
+                    reverse engineering and precise measurements. 
+                    \item [*] While the non-destructive approaches are taken the
+                    form of functional testing or side-channel analysis.
+                    \item [*] Functional testing consists of system inputs and
+                    verification on the outputs. However, for some HTs,
+                    triggering rate is extremely small. These test can be costly
+                    and time consuming.
+                    \item [*] Side-channel analysis detect the HTs by analyzing
+                    the physical characteristics of the chip. Such techniques
+                    include power analysis, time-based analysis, emission
+                    analysis, and thermal analysis.
+                    \item [*] One of the most popular techniques is PUF design.
+                    With certain amount of challenge and response (CRP)  pairs
+                    of the design, the PUF can be used as the signature of the
+                    chip.  
+                    \item [*] These designs can be easily implemented but
+                    requries a large amount of CRPs to have a complete coverage
+                    of the measurement space.
+                \end{itemize}
             \posterboxend
-        \column{0.33\textwidth}
             \posterbox{Optical Watermarks: Design and Measurement}
                 \begin{figure}
                     \centering
@@ -96,6 +128,8 @@
                     \label{fig:single_cell_response}
                 \end{figure}
             \posterboxend
+        \end{column}
+        \begin{column}[T]{0.33\textwidth}
             \posterbox{Detection Process}
                 \begin{figure}
                     \centering
@@ -113,25 +147,29 @@
                 \end{figure}
 
                 \begin{figure}[t]
-                    \centering
-                        \includegraphics[clip,width=0.33\textwidth]{img/mod/In.pdf}~
-                        \includegraphics[clip,width=0.33\textwidth]{img/shi/In.pdf}~
-                        \includegraphics[clip,width=0.33\textwidth]{img/rep/In.pdf}
-                    \caption{
-                        (a) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
-                        region when the fill cells are replaced with functional gates that
-                        constitute the Hardware Trojans. 
-                        (b) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
-                        region when the bottom 3 rows are shifted by 5 $\mu$m to the left make room for
-                        cells that constitute the HT. 
-                        (c) Backside image (reflectance value) of the $10\mu m \times 10\mu m$
-                        region when the functional cells are replaced by a different set of
+                    \begin{columns}
+                        \column{0.5\textwidth}
+                        \centering
+                        \includegraphics[clip,width=\textwidth]{img/mod/In.pdf}\\
+                        (a)\\
+                        \includegraphics[clip,width=\textwidth]{img/shi/In.pdf}\\
+                        (b)\\
+                        \includegraphics[clip,width=\textwidth]{img/rep/In.pdf}\\
+                        (c)
+                        \column{0.5\textwidth}
+                        \caption{
+                         (a) Backside image (reflectance value) of the $10\mu m
+                        \times 10\mu m$ region when the fill cells are replaced
+                        with functional gates that constitute the Hardware
+                        Trojans.  (b) Backside image (reflectance value) of the
+                        $10\mu m \times 10\mu m$ region when the bottom 3 rows
+                        are shifted by 5 $\mu$m to the left make room for cells
+                        that constitute the HT.  (c) Backside image (reflectance
+                        value) of the $10\mu m \times 10\mu m$ region when the
+                        functional cells are replaced by a different set of
                         cells that constitute the HT.}
-                    \label{fig:backside-img2}
-                    \vspace{-0.2in}
+                    \end{columns}
                 \end{figure} 
-                \posterboxend
-                \posterbox{Detection Process}
 
                 \begin{figure}[h]
                      \centering
@@ -151,34 +189,48 @@
                     \includegraphics[width=1.0\columnwidth]{img/thresholdDecision.pdf}
                         \vspace{-0.3in}
                     \label{fig:threshold}
-                    \caption{Detection Error rate vs Detection Threshold. \ignore{\color{red}After a Monte-Carlo simulation of detection error rate against
+                    \caption{Detection Error rate vs Detection Threshold.
+                    \ignore{\color{red}After a Monte-Carlo simulation of
+                    detection error rate against
                     detection threshold, we decide the optimized detection threshold should be
                     $0.65$ for a fixed SNR of 10.}}
                         \vspace{-0.25in}
                 \end{figure}
 
             \posterboxend
-        \column{0.33\textwidth}
+        \end{column}
+        \begin{column}[T]{0.33\textwidth}
             \posterbox{Evaluation}
 
                 \begin{figure}[ht]
                     \begin{center}
-                        \includegraphics[width=0.45\textwidth]{img/fillercells1.pdf}~
-                        \includegraphics[width=0.45\textwidth]{img/fillercells2.pdf}\par
-                        \includegraphics[width=0.45\textwidth]{img/fillercells3.pdf}~
-                        \includegraphics[width=0.45\textwidth]{img/fillercells4.pdf}
-                        \vspace{-0.1in}
-                        \caption{Impact of process variations on the reflectance signal for two
-                        different types of fill cells for various wavelengths. Black lines correspond to the nominal value, Red lines correspond to +10\% variation and Blue lines correspond to -10\% variation. X and Y correspond to X polarization and Y polarization, respectively.}
+                        \includegraphics[width=\textwidth]{img/fillercells1.pdf}\\
+                        \includegraphics[width=\textwidth]{img/fillercells2.pdf}\\
+                        \includegraphics[width=\textwidth]{img/fillercells3.pdf}\\
+                        \includegraphics[width=\textwidth]{img/fillercells4.pdf}\\
+                        \caption{Impact of process variations on the reflectance
+                        signal for two different types of fill cells for various
+                        wavelengths. Black lines correspond to the nominal
+                        value, Red lines correspond to +10\% variation and Blue
+                        lines correspond to -10\% variation. X and Y correspond
+                        to X polarization and Y polarization, respectively.}
                         \label{fig:PV}
                         \vspace{-0.3in}
                     \end{center}
                 \end{figure}
 
-                \begin{figure}[ht]
+                \begin{figure}[h]
                     \centering
-                    \includegraphics[width=0.95\textwidth]{img/snr.pdf}
-                    \vspace{-0.25in}
+                    \begin{columns}
+                        \column{0.5\textwidth}
+                        \includegraphics[width=\textwidth]{img/snr1.pdf}\\
+                        \includegraphics[width=\textwidth]{img/snr2.pdf}\\
+                        \includegraphics[width=\textwidth]{img/snr3.pdf}\\
+                        \column{0.5\textwidth}
+                        \includegraphics[width=\textwidth]{img/snr4.pdf}\\
+                        \includegraphics[width=\textwidth]{img/snr5.pdf}\\
+                        \includegraphics[width=\textwidth]{img/snr6.pdf}\\
+                    \end{columns}
                     \label{fig:snr}
                     \caption{
                         {\color{black}Testbench AES and PIC Trojan Detection Rate under different
@@ -193,57 +245,62 @@
                     \vspace{-0.15in}
                 \end{figure}
 
-                \begin{table}[!t]
-                    %\vspace{-3in}
-                    %\resizebox{\textwidth}{!}{%
-                    \begin{center}
-                    \begin{tabular*}{\columnwidth}{c c c}
-                        Testbench & Trojan Leakage        & Trojan Total Power  \\
-                                  & Percentage (\% of     & Percentage (\% of \\
-                                  & Total leakage)        & Total power) \\
-                    \hline
-                        AES100    & 1.64           & 1.05 \\
-                        AES200    & 0.8            & 1.0 \\
-                        AES1000   & 1.64           & 1.05 \\
-                        PIC100    &1.0             & 29 \\
-                        PIC200    & 1.21           & 34\\
-                        PIC300    &16              & 60 \\
-                    \end{tabular*}
-                    \vspace{-0.1in}%
-                    \caption{Trojan power overhead in various hardware blocks. The
-                    baseline designs of AES100, AES200 and AES1000 are the same, the inserted HTs
-                    are different. Similarly, the baseline design of PIC100, PIC200 and PIC300
-                    are the same but the inserted HTs are different. {\color{black}The power calculation was done using \textit{Nangate45nm} high performance library.}}
-                    \vspace{-0.35in}
-                    \label{tab:power}
-                    %}
-                    \end{center}
-                \end{table}
+                \begin{center}
+                    \begin{table}[h]
+                        %\vspace{-3in}
+                        %\resizebox{\textwidth}{!}{%
+                        \begin{center}
+                            \begin{tabular}{c c c}
+                                          & Trojan Leakage        & Trojan Total Power  \\
+                                Testbench & Percentage (\% of     & Percentage (\% of \\
+                                          & Total leakage)        & Total power) \\
+                            \hline
+                                AES100    & 1.64           & 1.05 \\
+                                AES200    & 0.8            & 1.0 \\
+                                AES1000   & 1.64           & 1.05 \\
+                                PIC100    &1.0             & 29 \\
+                                PIC200    & 1.21           & 34\\
+                                PIC300    &16              & 60 \\
+                            \end{tabular}
+                            \caption{Trojan power overhead in various hardware
+                            blocks. The baseline designs of AES100, AES200 and
+                            AES1000 are the same, the inserted HTs are different.
+                            Similarly, the baseline design of PIC100, PIC200 and
+                            PIC300 are the same but the inserted HTs are different.
+                            {\color{black}The power calculation was done using
+                            \textit{Nangate45nm} high performance library.}}
+                            \label{tab:power}
+                            %}
+                        \end{center}
+                    \end{table}
+                \end{center}
 
                 \begin{table}[h]
                     %\vspace{-3in}
                     %\resizebox{\textwidth}{!}{%
                     \begin{center}
-                    \begin{tabular}{c c c c}
-                        Testbench & Area without & Trojan     & Trojan Area      \\
-                                  & Trojans      & Area       & Percentage (\%)  \\
-                    \hline
-                        AES100    & 274177.6     & 253.2      & 0.0923 \\
-                        AES200    & 274177.6     & 169.5      & 0.0618 \\
-                        AES1000   & 274177.6     & 251.1      & 0.0915 \\
-                        PIC100 	  & 4215.0 & 351 & 8.33 \\
-                        PIC200    & 4215.0 & 89.6 & 2.13 \\
-                        PIC300    & 4215.0 & 253.2 & 6.01 \\
-                    \end{tabular}
-                    \vspace{-3mm}
-                    \caption{Area (in $\mu m^2$) occupied by various hardware blocks.}
-                    \vspace{-9mm}
-                    \label{tab:area}
-                    %}
+                        \begin{tabular}{c c c c}
+                            Testbench & Area without & Trojan     & Trojan Area      \\
+                                      & Trojans      & Area       & Percentage (\%)  \\
+                        \hline
+                            AES100    & 274177.6     & 253.2      & 0.0923 \\
+                            AES200    & 274177.6     & 169.5      & 0.0618 \\
+                            AES1000   & 274177.6     & 251.1      & 0.0915 \\
+                            PIC100 	  & 4215.0 & 351 & 8.33 \\
+                            PIC200    & 4215.0 & 89.6 & 2.13 \\
+                            PIC300    & 4215.0 & 253.2 & 6.01 \\
+                        \end{tabular}
+                        \vspace{-3mm}
+                        \caption{Area (in $\mu m^2$) occupied by various hardware blocks.}
+                        \vspace{-9mm}
+                        \label{tab:area}
+                        %}
                     \end{center}
                 \end{table}
             \posterboxend
             \posterbox{Conclusion}
             \posterboxend
+        \end{column}
     \end{columns}
+
 \end{document}
