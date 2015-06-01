@@ -7,7 +7,7 @@
 %posterbox def
 \newcommand{\titlebox}{
     \begin{center}
-        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=5mm,width=\textwidth,colframe=blue!70!black,colback=yellow!20]
+        \begin{tcolorbox}[left=2cm,right=2cm,arc=2cm,boxrule=5mm,width=\textwidth,colframe=blue!70!black,colback=yellow!5]
             \begin{center}
 }
 
@@ -18,7 +18,7 @@
 }
 
 \newcommand{\posterbox}[1]{
-    \begin{tcolorbox}[arc=5mm,width=\textwidth,colback=yellow!20,colframe=blue!70!black,adjusted
+    \begin{tcolorbox}[arc=5mm,width=\textwidth,colback=yellow!5,colframe=blue!70!black,adjusted
     title=#1,fonttitle=\LARGE,fontupper=\large,
     ]
     %graphical environment=tikzpicture,
@@ -36,11 +36,11 @@
 
 \begin{document}
     {\color{white}empty empty}\\
-    
+   % 
     \begin{columns}
         \column{0.2\textwidth}
             \begin{figure}
-                \includegraphics[width=3in]{img/Boston_University_seal.eps}
+                \includegraphics[width=\textwidth]{img/photonics_logo.pdf}
             \end{figure}
         \column{0.6\textwidth}
             \titlebox
@@ -48,41 +48,42 @@
             Embedded Watermarks}\\
             \large{Boyou Zhou, Ronen Adato, Mahmoud Zangeneh, Tianyu Yang, Aydan
             Uyar, \\Bennett Goldberg, Selim Unlu, Ajay Joshi\\}
+            \large{ Department of Electrical and Computer Engineering, Boston
+            University \\}
             \titleboxend
         \column{0.2\textwidth}
             \begin{figure}
-                \includegraphics[width=5in]{img/Boston_University_Wordmark.eps}
+                \includegraphics[width=7in]{img/Boston_University_Wordmark.eps}
             \end{figure}
     \end{columns}
-
-    {\color{white}empty empty}\\
+    \vspace{0.2in}
+    %{\color{white}\small{empty empty}}\\
     \begin{columns}
         \begin{column}[T]{0.33\textwidth}
             \posterbox{Introduction}
                 \begin{itemize}
                     \item [*] CMOS integrated circuits (ICs) become
                     critical in both defense and municipal support systems.
-                    \item [*] The IC industry has a trend towards international
-                    coorpation and away from vertical integration,
-                    which requires the security of ICs.
-                    \item [*] During the various phases of the IC integration,
-                    the ICs face threats from Hardware Trojans (HTs), IP privacy
-                    and IC counterfeiting. 
-                    \item [*] Among all these threats, HTs are one
-                    of the most significant problems. Since HTs can modify the
-                    functionality of ICs, leak secret information, disable the 
-                    entire chip, HTs are the security breaching point of
-                    hardware security.
+                    %\item [*] The IC industry has a trend towards international
+                    %co-operation and away from vertical integration,
+                    %which requires the security of ICs.
+                    %\item [*] During the various phases of the IC integration,
+                    %the ICs face threats from Hardware Trojans (HTs), IP privacy
+                    %and IC counterfeiting. 
+                    \item [*] HTs are one of the most significant problems in
+                    hardware security. Since HTs can modify the functionality of
+                    ICs, leak secret information, disable the entire chip, HTs
+                    are the security breaching point of hardware security.
                     \item [*] There are three kinds of HT insertions, malicious
                     IP core insertion, design modification and layout
                     modification. The first two can be detected during the
                     functional testing phase of IC production.
-                    \item [*] The layout insertion, however, can be extremely
+                    \item [*] The layout HT insertion, however, can be extremely
                     small in terms of area and power consumption, which is very
                     hard to be detected during the post-silicon
-                    verification.~\cite{rostami2014primer}
-                    \item [*] Thus, there is a pressing need for rapid, accurate
-                    and robust detection for this kind of HT insertion.
+                    verification.~\cite{rostami2014primer} 
+                    %\item [*] Thus, there is a pressing need for rapid, accurate
+                    %and robust detection for this kind of HT insertion.
                     \item [*] This work is proposing an optical method that can
                     detect malicious tampering and insertion of HTs at the
                     fabrication stage.
@@ -93,64 +94,93 @@
                     \item [*] State-of-the-art techniques for detecting HTs
                     include both destructive and non-destructive
                     approaches.~\cite{Tehranipoor2010,Karri2010}
-                    \item [*] Destructive approaches requires high cost of
-                    reverse engineering and precise measurements. 
-                    \item [*] While the non-destructive approaches are taken the
+                    %\item [*] Destructive approaches requires high cost of
+                    %reverse engineering and precise measurements. 
+                    \item [*] Non-destructive approaches are taken the
                     form of functional testing or side-channel
                     analysis.~\cite{Chakraborty2009}
-                    \item [*] Functional testing consists of system inputs and
-                    verification on the outputs. However, for some HTs,
-                    triggering rate is extremely small. These test can be costly
-                    and time consuming.
+                    %\item [*] Functional testing consists of system inputs and
+                    %verification on the outputs. However, for some HTs,
+                    %triggering rate is extremely small. These test can be costly
+                    %and time consuming.
                     \item [*] Side-channel analysis detect the HTs by analyzing
                     the physical characteristics of the chip. Such techniques
                     include power analysis, time-based analysis, emission
                     analysis, and thermal analysis.~\cite{Rad2008Iccad,
                     Alkabani2009Iccad,Potkonjak2009Dac, Sheng2012Tvlsi}
-                    \item [*] One of the most popular techniques is PUF design.
-                    With certain amount of challenge and response (CRP)  pairs
-                    of the design, the PUF can be used as the signature of the
-                    chip.~\cite{wei2012hardware}  
+                    %\item [*] One of the most popular techniques is PUF design.
+                    %With certain amount of challenge and response (CRP)  pairs
+                    %of the design, the PUF can be used as the signature of the
+                    %chip.~\cite{wei2012hardware}  
                     \item [*] These designs can be easily implemented but
-                    requries a large amount of CRPs to have a complete coverage
+                    requires a large amount of CRPs to have a complete coverage
                     of the measurement space.
                 \end{itemize}
             \posterboxend
             \posterbox{Optical Watermarks: Design and Measurement}
+                In this work, we propose the near-IR backside imaging for the
+                IC. The difference of near-IR imaging reflectance between
+                functional and engineered fill cells are significantly different.
                 \begin{figure}
                     \centering
                     \hspace{-5mm}
-                    \includegraphics[width=0.9\textwidth]{img/uni_response.pdf}
+                    \includegraphics[width=\textwidth]{img/uni_response.pdf}
                     \vspace{-3mm}
                     \caption{{\color{black} The reflectance spectrum of functional gates and
-                    fill cells, computed via FDTD simulations. The response is computed for both
-                    X and Y polarizations of the illuminating field (solid and dashed lines,
-                    respectively). For X polarization, the incident electric field is polarized
-                    along the VDD and VSS rails. For Y polarization, the polarization is
-                    perpendicular.}}
+                    fill cells, computed via FDTD simulations. }}
+                    %The response is computed for both X and Y polarizations of
+                    %the illuminating field (solid and dashed lines,
+                    %respectively). For X polarization, the incident electric
+                    %field is polarized along the VDD and VSS rails. For Y
+                    %polarization, the polarization is perpendicular.
                     \vspace{-0.25in}
                     \label{fig:single_cell_response}
                 \end{figure}
+                %We have demonstrate our approach on \textit{45nm Nangate Open
+                %Source technology node}.
+                %While we demonstrate our approach at the 45 nm technology node
+                %level, because our technique \emph{does not} require high
+                %resolution imaging we expect it to scale well with the move to
+                %smaller technology nodes.
+                %At the same time, it also scales well to measuring large areas
+                %since we rely on low resolution imaging. This enables
+                %measurements over a large field of view and therefore a large
+                %number of gates can be imaged simultaneously.
             \posterboxend
             \posterbox{Detection Process}
+                During the detection phase, the IC has been backside imaged with
+                near-IR light. Fill cells show much more reflectance than the
+                functional cells.
                 \begin{figure}
-                    \centering
-                %    \hspace{-10mm}
-                        \includegraphics[clip,width=0.365\textwidth]{img/layout.png}~
-                        \includegraphics[clip,width=0.5\textwidth]{img/mod/Free.pdf}
-                    %\vspace{-0.2in}
-                    \caption{
-                        (a) Physical layout of a $10\mu m \times 10\mu m$ region of the AEST100
-                        hardware block. (b) Backside image (reflectance value) of the $10\mu m
-                        \times 10\mu m$ region. The fill cells have the highest reflectance. 
-                    }
-                    \label{fig:backside-img1}
-                    \vspace{-0.2in}
+                    \begin{center}
+                        \includegraphics[clip,width=0.9\textwidth]{img/layout.png}\\
+                    \hspace{0.1in}
+                        \caption{
+                        Physical layout of a $10\mu m \times 10\mu m$ region of
+                        the AEST100 hardware block. We extract the layout from
+                        \textit{Cadence Encounter Place and Route Tool} and
+                        image with FDTD simulation from \textit{Lumerical}.
+                        }
+                    \end{center}
                 \end{figure}
+            %{\color{white}empty empty}\\
             \posterboxend
+        %{\color{white}empty empty}\\
         \end{column}
         \begin{column}[T]{0.33\textwidth}
             \posterbox{Detection Process}
+                \begin{figure}
+                    \begin{center}
+                        \includegraphics[clip,width=\textwidth]{img/mod/Free.pdf}
+                        \caption{
+                             Backside image (reflectance value) of the $10\mu m
+                            \times 10\mu m$ region. The fill cells have the highest reflectance. 
+                        }
+                        \label{fig:backside-img1}
+                    \end{center}
+                \end{figure}
+                If any of the cells being modified, replaced, or shifted, it
+                will be shown in the backside imaging.
                 \begin{figure}[t]
                     \begin{columns}
                     \column{0.5\textwidth}
@@ -172,34 +202,68 @@
                     \end{center}
                     \column{0.5\textwidth}
                         \caption{
-                         (a) Backside image (reflectance value) of the $10\mu m
+                        (a) Backside image (reflectance value) of the $10\mu m
                         \times 10\mu m$ region when the fill cells are replaced
-                        with functional gates that constitute the Hardware
-                        Trojans.  (b) Backside image (reflectance value) of the
+                        with functional gates that (b) Backside image (reflectance value) of the
                         $10\mu m \times 10\mu m$ region when the bottom 3 rows
-                        are shifted by 5 $\mu$m to the left make room for cells
-                        that constitute the HT.  }
-                    \end{columns}
-                        \justify
+                        are shifted by 5 $\mu$m .  
                         (c) Backside image (reflectance
                         value) of the $10\mu m \times 10\mu m$ region when the
                         functional cells are replaced by a different set of
-                        cells that constitute the HT.
+                        cells.
+                        }
+                    \end{columns}
+                        %\justify
                 \end{figure} 
-
                 \begin{figure}[h]
                      \centering
                          \includegraphics[width=0.5\textwidth]{img/real/Free.png}~
                          \includegraphics[width=0.5\textwidth]{img/real/In.png}
                      \caption{
-                         (a) Backside image (reflectance values) of a Trojan-free $50\mu m \times 50\mu
-                         m$ region of the AEST100 hardware block.
-                         (b) Backside image (reflectance values) of the same $50\mu m \times 50\mu
-                         m$ region of the AEST100 hardware block with {\color{black}CDMA private
-                         key disclosure} type of HT inserted in it.}
+                         Imaging of AES testbenches in $50\mu m \times 50\mu m $
+                         region.
+                         %(a) Backside image (reflectance values) of a Trojan-free $50\mu m \times 50\mu
+                         %m$ region of the AEST100 hardware block.
+                         %(b) Backside image (reflectance values) of the same $50\mu m \times 50\mu
+                         %m$ region of the AEST100 hardware block with {\color{black}CDMA private
+                         %key disclosure} type of HT inserted in it.
+                         }
                      \label{imaging_result}
                  \end{figure}
-
+            %We prove the robustness of our technique with certain amount of process
+            %variations and measurement noise. 
+            %With $\pm10\%$ variation, we showed that difference between
+            %functional cells and fill cells is sufficient enough for HT
+            %detection.
+                \begin{figure}[ht]
+                    \begin{center}
+                        \includegraphics[width=\textwidth]{img/fillercells1.pdf}\\
+                        \includegraphics[width=\textwidth]{img/fillercells2.pdf}\\
+                        \includegraphics[width=\textwidth]{img/fillercells3.pdf}\\
+                        \includegraphics[width=\textwidth]{img/fillercells4.pdf}\\
+                        \caption{Impact of PVs on the reflectance signals}
+                        %\caption{Impact of process variations on the reflectance
+                        %signal for two different types of fill cells for various
+                        %wavelengths. Black lines correspond to the nominal
+                        %value, Red lines correspond to +10\% variation and Blue
+                        %lines correspond to -10\% variation. X and Y correspond
+                        %to X polarization and Y polarization, respectively.}
+                        \label{fig:PV}
+                        \vspace{-0.3in}
+                    \end{center}
+                \end{figure}
+            We evaluate our technique's detection rate in the Monte-Carlo
+            simulation with various signal-to-noise ratio. 
+            {\color{white}empty empty}\\
+            %In order to achieve high detection rate, we optimized our threshold
+            %for HT detection with an SNR of 10.
+            %After backside imaging, we apply the correlation calculation between
+            %the HT free version images with the device under test to determine
+            %whether it is tampered or not.
+            \posterboxend
+        \end{column}
+        \begin{column}[T]{0.33\textwidth}
+            \posterbox{Evaluation}
                 \begin{figure}[h]
                     \centering
                     \includegraphics[width=1.0\columnwidth]{img/thresholdDecision.pdf}
@@ -212,30 +276,7 @@
                     $0.65$ for a fixed SNR of 10.}}
                         \vspace{-0.25in}
                 \end{figure}
-
-            \posterboxend
-            \posterbox{Detection Process}
-                \begin{figure}[ht]
-                    \begin{center}
-                        \includegraphics[width=\textwidth]{img/fillercells1.pdf}\\
-                        \includegraphics[width=\textwidth]{img/fillercells2.pdf}\\
-                        \includegraphics[width=\textwidth]{img/fillercells3.pdf}\\
-                        \includegraphics[width=\textwidth]{img/fillercells4.pdf}\\
-                        \caption{Impact of process variations on the reflectance
-                        signal for two different types of fill cells for various
-                        wavelengths. Black lines correspond to the nominal
-                        value, Red lines correspond to +10\% variation and Blue
-                        lines correspond to -10\% variation. X and Y correspond
-                        to X polarization and Y polarization, respectively.}
-                        \label{fig:PV}
-                        \vspace{-0.3in}
-                    \end{center}
-                \end{figure}
-            \posterboxend
-        \end{column}
-        \begin{column}[T]{0.33\textwidth}
-            \posterbox{Evaluation}
-
+                        \vspace{-0.25in}
                 \begin{figure}[h]
                     \centering
                     \begin{columns}
@@ -261,7 +302,29 @@
                     }
                     \vspace{-0.15in}
                 \end{figure}
+            The testbench of our HTs has very small in terms of area and power
+            consumption.
 
+                \begin{table}[h]
+                    %\vspace{-3in}
+                    %\resizebox{\textwidth}{!}{%
+                    \begin{center}
+                        \begin{tabular}{c c c c}
+                            Testbench & Area without & Trojan     & Trojan Area      \\
+                                      & Trojans      & Area       & Percentage (\%)  \\
+                        \arrayrulecolor{black}\hline
+                            AES100    & 274177.6     & 253.2      & 0.0923 \\
+                            AES200    & 274177.6     & 169.5      & 0.0618 \\
+                            AES1000   & 274177.6     & 251.1      & 0.0915 \\
+                            PIC100 	  & 4215.0 & 351 & 8.33 \\
+                            PIC200    & 4215.0 & 89.6 & 2.13 \\
+                            PIC300    & 4215.0 & 253.2 & 6.01 \\
+                        \end{tabular}
+                        \caption{Area (in $\mu m^2$) occupied by various hardware blocks.}
+                        \label{tab:area}
+                        %}
+                    \end{center}
+                \end{table}
                 \begin{table}[h]
                         %\vspace{-3in}
                         %\resizebox{\textwidth}{!}{%
@@ -269,7 +332,7 @@
                                           & Trojan Leakage        & Trojan Total Power  \\
                                 Testbench & Percentage (\% of     & Percentage (\% of \\
                                           & Total leakage)        & Total power) \\
-                            \hline
+                        \arrayrulecolor{black}\hline
                                 AES100    & 1.64           & 1.05 \\
                                 AES200    & 0.8            & 1.0 \\
                                 AES1000   & 1.64           & 1.05 \\
@@ -287,27 +350,6 @@
                             \label{tab:power}
                             %}
                 \end{table}
-
-                \begin{table}[h]
-                    %\vspace{-3in}
-                    %\resizebox{\textwidth}{!}{%
-                    \begin{center}
-                        \begin{tabular}{c c c c}
-                            Testbench & Area without & Trojan     & Trojan Area      \\
-                                      & Trojans      & Area       & Percentage (\%)  \\
-                        \hline
-                            AES100    & 274177.6     & 253.2      & 0.0923 \\
-                            AES200    & 274177.6     & 169.5      & 0.0618 \\
-                            AES1000   & 274177.6     & 251.1      & 0.0915 \\
-                            PIC100 	  & 4215.0 & 351 & 8.33 \\
-                            PIC200    & 4215.0 & 89.6 & 2.13 \\
-                            PIC300    & 4215.0 & 253.2 & 6.01 \\
-                        \end{tabular}
-                        \caption{Area (in $\mu m^2$) occupied by various hardware blocks.}
-                        \label{tab:area}
-                        %}
-                    \end{center}
-                \end{table}
             \posterboxend
             \posterbox{Conclusion}
             \begin{itemize}
@@ -323,10 +365,11 @@
             \posterboxend
             \posterbox{Reference}
                 \bibliographystyle{nar}
-                %\begin{multicols}{2}
+                \begin{multicols}{2}
                 \bibliography{src/bib/hw-security-spectroscopy-dac2015}
-                %\end{multicols}
+                \end{multicols}
             \posterboxend
+        %{\color{white}empty empty}\\
         \end{column}
     \end{columns}
 
