@@ -1,14 +1,25 @@
 \documentclass{beamer}
 
+\usepackage{biblatex}
+\setbeamerfont{footnote}{size=\tiny}
+
 \input{header-presentation}
-\title[Example Presentation]{Example Beamer Presentation}
-\author[schuyler.eldridge@gmail.com]{Schuyler Eldridge}
+\title[FPGA for BING!]{A Reconfigurable Fabric for Accelerating Large-Scale Datacenter Services}
+\author[bobzhou@bu.edu]{Reviewed by Boyou Zhou}
 \date[\today]{\today}
 
 \begin{document}
 \maketitle
 
-\section*{Example Slides}
+\section*{FPGA for BING!}
+
+\begin{frame}{Comparison Between GPP, FPGA, and ASIC}
+    \begin{figure}
+        \includegraphics[width=4in]{img/microsoft-fpga-vs-cpu-vs-asic.png}
+        \caption{FPGA, FPGA, and ASIC comparison from Microsoft\footcite{http://www.theplatform.net/2015/03/30/why-intel-might-buy-fpga-maker-altera}}
+        \label{fig:comparison}
+    \end{figure}
+\end{frame}
 
 \begin{frame}{Blocks Everywhere}
   \begin{block}{Blocks are better?}
