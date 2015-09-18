@@ -66,28 +66,43 @@
 \end{frame}
 
 \section{Main Work: Use FPGA for Bing}
-\begin{frame}{Main Work}
+\begin{frame}{Resolved Problems}
     \begin{block}{Resolved Problems}
         \begin{itemize}
-            \item CPUs are too slow
+            \item {\tt{Homogeneity Design}} \\
+            Homogeneity design reduces management issues and provide consistent platform to
+            rely on.
+            \item {\tt{Processing Speed}} \\
+            Datacenter requests for extreme speed, which CPUs do not provide. 
         \end{itemize}
     \end{block}
+\end{frame}
 
+\begin{frame}{Solution and Evaluation}
     \begin{block}{Solution: reconfigurable Fabric, catapult Fabric}
         \begin{itemize}
-            \item Each half-rack server is attached with a medium-sized FPGA and some DRAMs.
-            \item FPGAs are wired to each other in 6x8 two-dimensional torus.
+            \item Each server has its own FPGAs and local DRAMs. 
+            \item FPGAs are wired to each other in 6x8 two-dimensional torus, and provide hardware
+            solution to desired functionality.
+            \item Documents are processed through 8 pipelines of FPGAs.
         \end{itemize}
     \end{block}
 
     \begin{block}{Evaluation: search requests from Bing}
         \begin{itemize}
-            \item Softwares converts the documents to FPGA readable format, and then deliver the
-            data to FPGA
             \item 2x throughput compared to software approach in the number of docs ranked per
             second per server
         \end{itemize}
     \end{block}
+\end{frame}
+
+\begin{frame}{What is on board?}
+    \begin{itemize}
+        \item {\tt{8 GB of DRAM consists of two dual-rank DDR3-1600 SO-DIMMs}}
+        \item {\tt{High-end Altera Stratix V D5 FPGA}}
+        \item {\tt{A programmable oscillator}}
+        \item {\tt{32 MB of Quad SPI flash to hold FPGA configurations}}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Hardware Deployment}
@@ -106,51 +121,102 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Application Analysis}
+\begin{frame}{Application Analysis: High Level Description}
     \begin{itemize}
         \item Data Arrives at Front-End cache service
         \item If a reuest is missed, it is routed to a top-level aggregator (TLA).
         \item TLA selects a machine.
-        \item TLA sends the query to the machine.
-        \item The machine performs a ranking service.
+        \item TLA sends the query to the target machine.
+        \item The target machine performs a ranking service.
     \end{itemize}
 \end{frame}
 
-\section{How things are deployed}
-
-\begin{frame}{Blocks Everywhere}
-  \begin{block}{Blocks are better?}
+\begin{frame}{Application Analysis: Ranking service}
     \begin{itemize}
-    \item Everything in beamer seems to look better in blocks
-    \item So, the default slide has a block and an itemized list
-      \begin{itemize}
-      \item You can also nest itemized lists
-      \end{itemize}
+        \item Query words are the keywords and the document is the file to process.
+        \item {\tt{Software:}} 
+            \begin{itemize}
+                \item Retrieve both query and document to a metastream
+                \item Generate hit vectors
+                \item Software generated features, such as numbers of hits.
+            \end{itemize}
+        \item {\tt{FPGA:}} 
+            \begin{itemize}
+                \item Synthetic features are computed, such as Free-Form Expressions.
+                \item Features are sent to machine leant model to generate a score.
+            \end{itemize}
     \end{itemize}
-  \end{block}
 \end{frame}
 
-\begin{frame}{Column Slide}
-  \begin{columns}[t]
-    \column{0.60\textwidth}
-    \begin{block}{First \textbf{BIG} Column}
-      \begin{itemize}
-      \item You can split content into columns
-      \item Column size is governed manually
-      \item Column alignment (here \texttt{b}, bottom) can also be specified
-      \end{itemize}
-    \end{block}
-
-    \column{0.35\textwidth}
-    \begin{block}{Second {\tiny little} Column}
-      \begin{itemize}
-      \item ALPHA
-      \item BRAVO
-      \item CHARLIE
-      \item DELTA
-      \item ECHO
-      \end{itemize}
-    \end{block}
-  \end{columns}
+\begin{frame}{Pipeline Stages}
+    \begin{figure}
+        \includegraphics[width=2.5in]{img/fpga-pipeline.png}
+        \caption{8 FPGAs in pipeline}
+    \end{figure}
 \end{frame}
+
+\begin{frame}{Pipeline Stages}
+    \begin{itemize}
+        \item Feature Extraction
+        \item 2 $\times$ Free-Form Expression
+        \item Compression
+        \item 3 $\times$ Machine-learned Score Models
+        \item Rotate the ring if there is a system failure
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Model Reload and Queue Manager}
+    \begin{itemize}
+        \item Models: Different sets of features and free forms. Model reloading takes about 250 $\mu
+        s$, while reconfiguration takes about miliseconds or seconds.
+        \item Queue Manager: Query and documents are stored in queues in the DRAM. QM switch queues when
+        data are processed.
+    \end{itemize}
+\end{frame}
+
+\section{Evaluation}
+
+\begin{frame}{Troughput Comparison}
+    \begin{figure}
+        \includegraphics[width=4in]{img/throughput-comparison.png}
+        \caption{Each Stage Throughput Comparison}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Latency Comparison}
+    \begin{figure}
+        \includegraphics[width=4in]{img/latency-cpu-fe.png}
+        \caption{Latency with different number of threads injection in FE stage}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Document Injection Rate}
+    \begin{figure}
+        \includegraphics[width=4in]{img/document-injection-rate.png}
+        \caption{Document Injection Rate}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Throughput increase}
+    \begin{figure}
+        \includegraphics[width=4in]{img/throughput-increase.png}
+        \caption{Throughput increase}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Node Latency Injection}
+    \begin{figure}
+        \includegraphics[width=4in]{img/node-latency-injection.png}
+        \caption{Node Latency Injection}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{CPU Throughput Threads}
+    \begin{figure}
+        \includegraphics[width=4in]{img/throughput-cpu-thread.png}
+        \caption{Throughput CPU Threads}
+    \end{figure}
+\end{frame}
+
+
 \end{document}
