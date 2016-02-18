@@ -45,7 +45,7 @@ TARGETS_OPT = $(TARGETS_PDF:%.pdf=%-opt.pdf)
 
 SPACE       = $(EMPTY) $(EMPTY)
 
-LATEXMK_PDF = latexmk \
+LATEXMK_PDF = ~/colorlatexmk \
 	-pdf \
 	-latexoption="--shell-escape -halt-on-error -file-line-error" \
 	-bibtex \
@@ -73,6 +73,14 @@ vpath %.tex src
 # LaTeX formatting cleanup (format-build) OR to just build without
 # cleanup (noformat-build)
 all: noformat-build
+
+# pdf viewer
+view:
+	@if which mupdf > /dev/null; then\
+		mupdf -r 250 build/latex-base-presentation.pdf &\
+	else\
+		evince build/latex-base-presentation.pdf &\
+	fi
 
 # Top-level build target that runs format (cleanup all source files
 # into a "nice" format good for version control) before building
